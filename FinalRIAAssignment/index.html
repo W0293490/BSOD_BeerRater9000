@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Beer Rater 9000</title>
+
+        <!--LINKS-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+        <link href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css"rel = "stylesheet">
+        <link rel="stylesheet" href="Css/styles.css">
+
+        <!--SCRIPTS-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
+        <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+        <script src="JavaScript/javascript.js"></script>
+    </head>
+    <body>
+        <div id = "dialog" title = "About"></div>
+        <div id="content">
+            <nav class="navbar navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="#">Current Beer</a>
+                    </div>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <p class="glyphicon glyphicon-menu-hamburger"></p>
+                            <ul class="dropdown-menu">
+                                <li><a href="#" onclick="changeDiv('login');">Login</a></li>
+                                <li><a href="#" onclick="changeDiv('register');">Register</a></li>
+                                <li><a href="#" id="about">About</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <div id="beer-reviews" style="display: inline;">
+                <div id="sides">
+                    <div id="left-side">
+                        <input id="search" type="text" onkeyup="filter()" placeholder="Search for beer type..."/>
+                        <div id ="list-area">
+                            <ul id="list"></ul>
+                        </div>
+                    </div>
+                    <div id="right-side">
+                        <div id="loader" class="loader" style="display: none;"></div>
+
+                    </div>
+                    <hr />  
+                    <label id="info"></label>
+                </div>
+            </div>
+
+            <div id="login" style="display: none">
+                <h1>Login</h1>
+                <div class="w3-container w3-card-4" id="login-form">
+                    <h2 class="w3-text-blue">Enter your credentials</h2>
+                    <p>      
+                        <label class="w3-text-blue"><b>User Name:</b></label>
+                        <input class="w3-input w3-border" id="username-login" type="text" required>
+                    </p>
+                    <p>      
+                        <label class="w3-text-blue"><b>Password:</b></label>
+                        <input class="w3-input w3-border" id="password-login" type="password" required>
+                    </p>
+                    <p>      
+                        <button class="w3-btn w3-blue" onclick="signInUser();">Login</button>
+                    </p>
+                </div>
+            </div>
+
+            <div id="register" style="display: none">
+                <h1>Register User</h1>
+                <div class="w3-container w3-card-4" id="register-form">
+                    <h2 class="w3-text-blue">Enter your information</h2>
+                    <p>      
+                        <label class="w3-text-blue"><b>User Name:</b></label>
+                        <input class="w3-input w3-border" id="username-register" type="text" required>
+                    </p>
+                    <p>      
+                        <label class="w3-text-blue"><b>Password:</b></label>
+                        <input class="w3-input w3-border" id="password-register" type="password" required>
+                    </p>
+                    <p>      
+                        <label class="w3-text-blue"><b>Email:</b></label>
+                        <input class="w3-input w3-border" id="password-email" type="text" required>
+                    </p>
+                    <p>      
+                        <button class="w3-btn w3-blue" onclick="registerUser();">Register</button>
+                    </p>
+                </div>
+            </div>
+            <div id="error"/>
+        </div>
+        <label id="info"></label>
+    </body>
+</html>
