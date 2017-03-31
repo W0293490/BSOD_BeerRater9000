@@ -70,7 +70,7 @@ function registerUser() {
     }
 	
     var register_password = password; // Get text from password field to variable, R1
-    var hashed_register_password = Crypt.HASH.md5(register_password); // Hash the password in a new variable, R2
+    var hashed_register_password = Crypt.HASH.sha512(register_password); // Hash the password in a new variable, R2
     hashed_register_password = hashed_register_password.words.join(''); // Join the hash array to a string
 
     var newUser = {
@@ -143,7 +143,7 @@ function signInUser() {
     password = password.value;
 
     var loggingInPassword = password; // Get login password text, L1
-    var hashLoginPassword = Crypt.HASH.md5(loggingInPassword); // Hash the login password, L2
+    var hashLoginPassword = Crypt.HASH.sha512(loggingInPassword); // Hash the login password, L2
     hashLoginPassword = hashLoginPassword.words.join(''); // Join the hash array as string
     
     $.ajax({
