@@ -90,7 +90,30 @@ function signInUser() {
     username = username.value;
     password = password.value;
     
-    changeDiv();
+    $.ajax({
+        url: "http://localhost:3000/Users",
+        type: "GET",
+        success: function(data){
+            console.log(data);
+
+            for( var i = 0; i < data.length; i ++){
+                if(username == data[i].Username && password == data[i].password){
+                    currentUser = data[i];
+                    localStorage.setItem("user", JSON.stringify(currentUser));
+                    setUserInfo();
+                    changeDiv();
+                }
+            }
+            if(currentUser == null || currentUser == "null"){
+                error.innerHTML = "ERROR: Username or Password is incorrect.";
+                return;
+            }
+        },
+        error: function(){
+            error.innerHTML = "Error Logging in.";
+            return;
+        }
+    });
 }
 
 
