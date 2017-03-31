@@ -13,6 +13,34 @@
       "email": "sean@sean.com",
       "isAdmin": "false",
       "id": 2
+    },
+    {
+      "Username": "andrew",
+      "password": "test123",
+      "email": "asdjfsaf",
+      "isAdmin": "false",
+      "id": 3
+    },
+    {
+      "Username": "andrew",
+      "password": "test123",
+      "email": "asdfsafs",
+      "isAdmin": "false",
+      "id": 4
+    },
+    {
+      "Username": "andrew",
+      "password": "-736260903-1895779836-377484904-319274370",
+      "email": "asdfsafsafsa",
+      "isAdmin": "false",
+      "id": 5
+    },
+    {
+      "Username": "poop123",
+      "password": "-736260903-1895779836-377484904-319274370",
+      "email": "poop123",
+      "isAdmin": "false",
+      "id": 6
     }
   ],
   "Beer-Types": [],

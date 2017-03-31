@@ -1,3 +1,5 @@
+var Crypt = new Crypt();
+
 if (typeof(Storage) !== "undefined") {
     var currentUser = localStorage.getItem("user");
 } else {
@@ -51,10 +53,13 @@ function registerUser() {
     username = username.value;
     email = email.value;
 
-
+    var register_password = password.value; // Get text from password field to variable
+    var hashed_register_password = Crypt.HASH.md5(register_password); // Hash the password in a new variable
+    hashed_register_password = hashed_register_password.words.join(''); // Join the hash array to a string
+console.log(hashed_register_password);
     var newUser = {
     Username: username,
-    password: password,
+    password: hashed_register_password, // Write hashed pw to db
     email: email,
     isAdmin: false
     }
@@ -89,6 +94,11 @@ function signInUser() {
     }
     username = username.value;
     password = password.value;
+
+    var loggingInPassword = password.value; // Get login password text
+    var hashLoginPassword = Crypt.HASH.md5(loggingInPassword); // Hash the login password
+    hashLoginPassword = hashLoginPassword.words.join(''); // Join the hash array as string
+    console.log(hashLoginPassword);
     
     $.ajax({
         url: "http://localhost:3000/Users",
@@ -97,7 +107,7 @@ function signInUser() {
             console.log(data);
 
             for( var i = 0; i < data.length; i ++){
-                if(username == data[i].Username && password == data[i].password){
+                if(username == data[i].Username && hashLoginPassword == data[i].password){
                     currentUser = data[i];
                     localStorage.setItem("user", JSON.stringify(currentUser));
                     setUserInfo();
