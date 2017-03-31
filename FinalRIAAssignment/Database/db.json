@@ -1,0 +1,20 @@
+{
+  "Users": [
+    {
+      "Username": "RedJordan",
+      "password": "RedJordan",
+      "email": "RedJordan@hotmail.com",
+      "isAdmin": "false",
+      "id": 1
+    },
+    {
+      "Username": "sean",
+      "password": "password",
+      "email": "sean@sean.com",
+      "isAdmin": "false",
+      "id": 2
+    }
+  ],
+  "Beer-Types": [],
+  "Beer-Reviews": []
+}
