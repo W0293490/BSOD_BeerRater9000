@@ -9,7 +9,18 @@ $( document ).ready(function() {
     if(currentUser != "null" && currentUser != null){
         currentUser = JSON.parse(currentUser);
         setUserInfo();
+        setLoggedOutClasses(false);
     }
+
+    $( "#dialog" ).dialog({
+        autoOpen: false,  
+    });
+    $( "#about" ).click(function() {
+        document.getElementById("dialog").innerText 
+            = "By: Blue Screen of Death\nClass: Rich Internet Applications" +
+              "\nCreated: March. 30nd 2017 \nVersion 1.0.2";
+        $( "#dialog" ).dialog( "open" );
+    });
 });
 
 function changeDiv(divName) {
@@ -32,6 +43,7 @@ function registerUser() {
     var username = document.getElementById("username-register");
     var password = document.getElementById("password-register");
     var email = document.getElementById("password-email");
+    var usernameOrEmailTaken = false;
     if (!username.checkValidity()) {
         error.innerHTML = "ERROR: Username Field - " + username.validationMessage;
         return;
@@ -52,11 +64,15 @@ function registerUser() {
     }
     username = username.value;
     email = email.value;
+    if(!validateEmail(email)){
+        error.innerHTML = "ERROR: Email Field - Invalid email format";
+        return;
+    }
 
     var register_password = password.value; // Get text from password field to variable
     var hashed_register_password = Crypt.HASH.md5(register_password); // Hash the password in a new variable
     hashed_register_password = hashed_register_password.words.join(''); // Join the hash array to a string
-console.log(hashed_register_password);
+
     var newUser = {
     Username: username,
     password: hashed_register_password, // Write hashed pw to db
@@ -66,13 +82,41 @@ console.log(hashed_register_password);
 
     $.ajax({
         url: "http://localhost:3000/Users",
-        type: "POST",
-        data: newUser,
-        success: function(data){
-            currentUser = newUser;
-            localStorage.setItem("user", JSON.stringify(currentUser));
-            setUserInfo();
-            changeDiv();
+        type: "GET",
+        success: function(users){
+            for( var i = 0; i < users.length; i ++){
+                if(username == users[i].Username){
+                    error.innerHTML = "ERROR: Username already taken.";
+                    usernameOrEmailTaken = true;
+                }
+                else if(email == users[i].email){
+                    error.innerHTML = "ERROR: Email already in use.";
+                    usernameOrEmailTaken = true;
+                }
+            }
+
+            if(!usernameOrEmailTaken){
+                $.ajax({
+                    url: "http://localhost:3000/Users",
+                    type: "POST",
+                    data: newUser,
+                    success: function(data){
+                        currentUser = newUser;
+                        localStorage.setItem("user", JSON.stringify(currentUser));
+                        setLoggedOutClasses(false);
+                        setUserInfo();
+                        changeDiv();
+                        document.getElementById("username-register").value = "";
+                        password = document.getElementById("password-register").value = "";
+                        email = document.getElementById("password-email").value = "";
+                        error.innerHTML = "";
+                    },
+                    error: function(){
+                        error.innerHTML = "Error registering user.";
+                        return;
+                    }
+                });
+            }
         },
         error: function(){
             error.innerHTML = "Error registering user.";
@@ -98,20 +142,21 @@ function signInUser() {
     var loggingInPassword = password.value; // Get login password text
     var hashLoginPassword = Crypt.HASH.md5(loggingInPassword); // Hash the login password
     hashLoginPassword = hashLoginPassword.words.join(''); // Join the hash array as string
-    console.log(hashLoginPassword);
     
     $.ajax({
         url: "http://localhost:3000/Users",
         type: "GET",
         success: function(data){
-            console.log(data);
-
             for( var i = 0; i < data.length; i ++){
                 if(username == data[i].Username && hashLoginPassword == data[i].password){
                     currentUser = data[i];
                     localStorage.setItem("user", JSON.stringify(currentUser));
+                    setLoggedOutClasses(false);
                     setUserInfo();
                     changeDiv();
+                    document.getElementById("username-login").value = "";
+                    document.getElementById("password-login").value = "";
+                    error.innerHTML = "";
                 }
             }
             if(currentUser == null || currentUser == "null"){
@@ -126,21 +171,6 @@ function signInUser() {
     });
 }
 
-
-
-$(document).ready(function() {
-    $( "#dialog" ).dialog({
-        autoOpen: false,  
-    });
-    $( "#about" ).click(function() {
-        document.getElementById("dialog").innerText 
-            = "By: Blue Screen of Death\nClass: Rich Internet Applications" +
-              "\nCreated: March. 30nd 2017 \nVersion 1.0.2";
-        $( "#dialog" ).dialog( "open" );
-    });
-});
-
-
 function setUserInfo(){
     document.getElementById("user-info").style.display = "inline";
     document.getElementById("user-name").innerHTML = currentUser.Username;
@@ -151,4 +181,21 @@ function logout(){
     localStorage.setItem("user", null);
     document.getElementById("user-info").style.display = "none";
     document.getElementById("user-name").innerHTML = "";
+    setLoggedOutClasses(true);
+}
+
+function setLoggedOutClasses(isLoggedOut){
+    var displayType = "none";
+    if(isLoggedOut){
+        displayType = "inline";
+    }
+    var loggedOutMenuItems = document.getElementsByClassName("logged-out-menu-items");
+    for(var i = 0; i < loggedOutMenuItems.length; i ++){
+        loggedOutMenuItems[i].style.display = displayType;
+    }
+}
+
+function validateEmail(email) {
+    var re = /^[a-zA-Z][a-zA-Z0-9_.]*(\.[a-zA-Z][a-zA-Z0-9_.]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?$/;
+    return re.test(email);
 }
