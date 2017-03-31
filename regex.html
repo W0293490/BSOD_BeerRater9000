@@ -1,0 +1,22 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1252" >
+<head>
+
+<script>
+function validateEmail(email) {
+    var re = /^[a-z][a-zA-Z0-9_.]*(\.[a-zA-Z][a-zA-Z0-9_.]*)?@[a-z][a-zA-Z-0-9]*\.[a-z]+(\.[a-z]+)?$/;
+    return re.test(email);
+}
+
+console.log(validateEmail("andrew@gmail.com")); // t
+console.log(validateEmail("a@a.com")); //t
+console.log(validateEmail("andrew@gmail")); //f 
+console.log(validateEmail("andrewmail.com"));//f 
+console.log(validateEmail(".andrew@gmail.com")); //f 
+console.log(validateEmail("and.rew@gmail.com")); //t 
+console.log(validateEmail("and-rew@gmail.com")); //f 
+console.log(validateEmail("and_rew@gmail.com"));//t 
+</script>
+
+<body>
+</body>
