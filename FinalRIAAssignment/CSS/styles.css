@@ -8,8 +8,14 @@
     margin-left: 33%;
 }
 .navbar{
+    background-color: #795a31;
+    color: #e3a658;
     margin: 0px;
     border-radius: 0px;
+}
+
+.navbar-brand{
+    color: #e3a658;
 }
 .container-fluid{
     padding-top: 1vh;
@@ -42,12 +48,13 @@ hr{
     min-height: 675px;
     width: 25%;
     float: left;
-    background-color: lightgray;
+    background-color: rgba(121, 90, 49, 0.67);
     box-shadow: inset 0 0 10px #000000;
 }
 #right-side{
     width: 75%;
     overflow: auto;
+    background-color: rgb(227, 166, 88);
 }
 
 #search{
