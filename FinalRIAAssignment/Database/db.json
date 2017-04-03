@@ -17,40 +17,32 @@
   ],
   "Beer-Types": [
     {
-      "name": "879789",
-      "beerReviews": [],
-      "isActive": "true",
+      "name": "F",
+      "createdAt": "Mon Apr 03 2017 3:56:06 PM",
+      "isActive": "false",
       "id": 1
     },
     {
-      "name": "4",
-      "isActive": "true",
-      "beerReviews[0][reviewMessage]": "",
-      "beerReviews[0][rating]": "",
-      "beerReviews[0][createdBy]": "",
-      "beerReviews[0][createdAt]": "",
-      "beerReviews[0][updatedAt]": "",
+      "name": "TEST",
+      "createdAt": "Mon Apr 03 2017 3:56:12 PM",
+      "isActive": "false",
       "id": 2
     },
     {
-      "name": "90090",
-      "beerReviews[0][reviewMessage]": "",
-      "beerReviews[0][rating]": "",
-      "beerReviews[0][createdBy]": "",
-      "beerReviews[0][createdAt]": "",
-      "beerReviews[0][updatedAt]": "",
-      "isActive": "true",
+      "name": "134",
+      "createdAt": "Mon Apr 03 2017 3:56:18 PM",
+      "isActive": "false",
       "id": 3
     },
     {
-      "name": "55",
-      "createdAt": "",
-      "isActive": "true",
+      "name": "",
+      "createdAt": "Mon Apr 03 2017 3:59:43 PM",
+      "isActive": "false",
       "id": 4
     },
     {
       "name": "2",
-      "createdAt": "",
+      "createdAt": "Mon Apr 03 2017 4:03:29 PM",
       "isActive": "true",
       "id": 5
     }
