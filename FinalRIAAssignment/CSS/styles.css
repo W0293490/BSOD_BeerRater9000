@@ -27,6 +27,12 @@ hr{
     margin-top: 10px;
 }
 
+#user-info{
+    display: none;
+}
+#login, #register{
+    display: none;
+}
 .navbar .dropdown{
     font-size: 20px;
 }
