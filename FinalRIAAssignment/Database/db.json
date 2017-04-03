@@ -2,19 +2,57 @@
   "Users": [
     {
       "Username": "RedJordan",
-      "password": "RedJordan",
-      "email": "RedJordan@hotmail.com",
+      "password": "1053048856-24675773-1610459268563112731-20455687861786744110-132781181713120503271092803055201521087996752768252311576489058414-1365547490-1423464655926682729",
+      "email": "RedJordan@RedJordan.com",
       "isAdmin": "false",
       "id": 1
     },
     {
-      "Username": "sean",
-      "password": "password",
-      "email": "sean@sean.com",
+      "Username": "RedJordan1",
+      "password": "-941100463-457049820-509892417133537269293117508-19154453211005815820-1609443511-1313332128216762209-19032409-846163207570870545222437695-5849108481740710196",
+      "email": "RedJordan123@RedJordan.com",
       "isAdmin": "false",
       "id": 2
     }
   ],
-  "Beer-Types": [],
-  "Beer-Reviews": []
+  "Beer-Types": [
+    {
+      "name": "879789",
+      "beerReviews": [],
+      "isActive": "true",
+      "id": 1
+    },
+    {
+      "name": "4",
+      "isActive": "true",
+      "beerReviews[0][reviewMessage]": "",
+      "beerReviews[0][rating]": "",
+      "beerReviews[0][createdBy]": "",
+      "beerReviews[0][createdAt]": "",
+      "beerReviews[0][updatedAt]": "",
+      "id": 2
+    },
+    {
+      "name": "90090",
+      "beerReviews[0][reviewMessage]": "",
+      "beerReviews[0][rating]": "",
+      "beerReviews[0][createdBy]": "",
+      "beerReviews[0][createdAt]": "",
+      "beerReviews[0][updatedAt]": "",
+      "isActive": "true",
+      "id": 3
+    },
+    {
+      "name": "55",
+      "createdAt": "",
+      "isActive": "true",
+      "id": 4
+    },
+    {
+      "name": "2",
+      "createdAt": "",
+      "isActive": "true",
+      "id": 5
+    }
+  ]
 }
