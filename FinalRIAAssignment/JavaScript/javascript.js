@@ -1,4 +1,5 @@
 var Crypt = new Crypt();
+var beerTypes;
 
 if (typeof(Storage) !== "undefined") {
     var currentUser = localStorage.getItem("user");
@@ -208,15 +209,75 @@ function validateEmail(email) {
     return re.test(email);
 }
 
+
+function getBeerTypes(){
+    beerTypes = [];
+    var numOfBeers = 0;
+    $.ajax({
+        url: "http://localhost:3000/Beer-Types",
+        type: "GET",
+        success: function(data){
+            for(var i = 0; i < data.length; i ++){
+                if(data[i].isActive == "true"){
+                    beerTypes[numOfBeers] = data[i];
+                    numOfBeers ++;
+                }
+            }
+        },
+        error: function(){
+            error.innerHTML = "Error getting beer types.";
+            return;
+        }
+    });
+}
+
+function checkIfBeerTaken(beerTypeName){
+    var beerNameTaken = false;
+    for(var i = 0; i < beerTypes.length; i ++){
+        if(beerTypeName == beerTypes[i].name){
+                $('<form><p>Sorry, Beer type already exists.</p></form>').dialog({
+                modal: true,
+                title: "Beer Type Taken",
+                buttons: {
+                    'OK': function () {
+                        $(this).dialog('close');
+                    }
+                }
+            });
+            beerNameTaken = true;
+        }
+    }
+    return beerNameTaken;
+}
+
+function invalidBeerType(){
+    $('<form><p>Sorry, that is not a valid name.</p></form>').dialog({
+        modal: true,
+        title: "Invalid name",
+        buttons: {
+            'OK': function () {
+                getBeerTypes()
+                $(this).dialog('close');
+            }
+        }
+    });
+}
+
+
 function createBeerType(){
-    $('<form><input type="text" id="beer-type-name"><br></form>').dialog({
+    $('<form><p>Enter Beer Name:</p> <input type="text" id="beer-type-name"><br></form>').dialog({
         modal: true,
         title: "Create Beer Type",
         buttons: {
             'OK': function () {
                 var beerTypeName = $(this).find("#beer-type-name").val();
-                storeBeerType(beerTypeName);
                 $(this).dialog('close');
+                if(beerTypeName.length > 0){
+                    storeBeerType(beerTypeName);
+                }
+                else{
+                    invalidBeerType();
+                }
             },
             'Cancel': function () {
                 $(this).dialog('close');
@@ -226,96 +287,169 @@ function createBeerType(){
 }
 
 function storeBeerType(beerTypeName){
-    var beerNameTaken = false;
-    $.ajax({
-        url: "http://localhost:3000/Beer-Types",
-        type: "GET",
-        success: function(data){
-            for(var i = 0; i < data.length; i ++){
-                if(beerTypeName == data[i].name && data[i].isActive){
-                     $('<form><p>Sorry, Beer type already exists.</p></form>').dialog({
-                        modal: true,
-                        title: "Beer Type Taken",
-                        buttons: {
-                            'OK': function () {
-                                $(this).dialog('close');
-                            }
-                        }
-                    });
-                    beerNameTaken = true;
-                }
-            }
+    var beerNameTaken = checkIfBeerTaken(beerTypeName);
 
-            if(!beerNameTaken){
-               var newBeerType = {
-                name: beerTypeName,
-                createdAt: null,
-                isActive: true
-            };
-            
-                $.ajax({
-                    url: "http://localhost:3000/Beer-Types",
-                    type: "POST",
-                    data: newBeerType,
-                    success: function(data){
-                        $('<form><p>The new beer type has been created.</p></form>').dialog({
-                        modal: true,
-                        title: "Beer Type Created",
-                        buttons: {
-                            'OK': function () {
-                                $(this).dialog('close');
-                            }
+    if(!beerNameTaken){
+        var currDate = new Date();
+        var newBeerType = {
+            name: beerTypeName,
+            createdAt: currDate.toDateString() + " " + currDate.toLocaleTimeString(),
+            isActive: true
+        };
+
+        $.ajax({
+            url: "http://localhost:3000/Beer-Types",
+            type: "POST",
+            data: newBeerType,
+            success: function(data){
+                $('<form><p>The new beer type has been created.</p></form>').dialog({
+                modal: true,
+                title: "Beer Type Created",
+                buttons: {
+                    'OK': function () {
+                        getBeerTypes()
+                        $(this).dialog('close');
+                    }
+                }
+            });
+            },
+            error: function(){
+                $('<form><p>Error adding new beer type.</p></form>').dialog({
+                    modal: true,
+                    title: "Error",
+                    buttons: {
+                        'OK': function () {
+                            getBeerTypes()
+                            $(this).dialog('close');
                         }
-                    });
-                    },
-                    error: function(){
-                        error.innerHTML = "Error adding beer type.";
-                        return;
                     }
                 });
             }
-        },
-        error: function(){
-            error.innerHTML = "Error getting beer types.";
-            return;
-        }
-    });
-
+        });
+    }
 }
+
 function updateBeerType(){
     var dialog = "<form><label>Beer To Change:</label> <select id='beerToChange'>"
-    $.ajax({
-        url: "http://localhost:3000/Beer-Types",
-        type: "GET",
-        success: function(beerTypes){
-            console.log (beerTypes);
-            for(var i = 0; i < beerTypes.length; i ++){
-                dialog += "<option value='" + i + "'>" + beerTypes[i].name + "</option>";
-            }
+    for(var i = 0; i < beerTypes.length; i ++){
+        dialog += "<option value='" + beerTypes[i].id + "'>" + beerTypes[i].name + "</option>";
+    }
+    dialog += "</select> <label>Enter new Name:</label> <input type='text' id='new-beer-type-name'></form>";
 
-            dialog += "</select></form>";
-            console.log (dialog);
-            $(dialog).dialog({
+    $(dialog).dialog({
+        modal: true,
+        title: "Update Beer Type",
+        buttons: {
+            'OK': function () {
+                var beerId = $(this).find("#beerToChange").val();
+                var beerTypeName = $(this).find("#new-beer-type-name").val();
+                $(this).dialog('close');
+                if(beerTypeName.length > 0){
+                    patchBeerType(beerId, beerTypeName);
+                }
+                else{
+                    invalidBeerType();
+                }
+            },
+            'Cancel': function () {
+                $(this).dialog('close');
+            }
+        }
+    });
+}
+
+function patchBeerType(beerId, beerTypeName){
+    var beerNameTaken = checkIfBeerTaken(beerTypeName);
+
+    if(!beerNameTaken){
+        var updatedBeerType = {
+            name: beerTypeName
+        };
+        $.ajax({
+            url: "http://localhost:3000/Beer-Types/" + beerId,
+            type: "Patch",
+            data: updatedBeerType,
+            success: function(data){
+                $('<form><p>Beer type updated.</p></form>').dialog({
+                    modal: true,
+                    title: "Success",
+                    buttons: {
+                        'OK': function () {
+                            getBeerTypes();
+                            $(this).dialog('close');
+                        }
+                    }
+                });
+            },
+            error: function(){
+                $('<form><p>Error updating beer type.</p></form>').dialog({
+                    modal: true,
+                    title: "Error",
+                    buttons: {
+                        'OK': function () {
+                            $(this).dialog('close');
+                        }
+                    }
+                });
+            }
+        });
+    }
+}
+function deleteBeerType(){
+    var dialog = "<form><label>Beer To Delete:</label> <select id='beerToDelete'>"
+    console.log(beerTypes);
+    for(var i = 0; i < beerTypes.length; i ++){
+        dialog += "<option value='" + beerTypes[i].id  + "'>" + beerTypes[i].name + "</option>";
+    }
+    dialog += "</select></form>";
+
+    $(dialog).dialog({
+        modal: true,
+        title: "Delete Beer Type",
+        buttons: {
+            'OK': function () {
+                var beerId = $(this).find("#beerToDelete").val();
+                deleteBeer(beerId);
+                $(this).dialog('close');
+            },
+            'Cancel': function () {
+                $(this).dialog('close');
+            }
+        }
+    });
+}
+
+function deleteBeer(beerId){
+    var removedBeerType = {
+            isActive: false
+        };
+    $.ajax({
+        url: "http://localhost:3000/Beer-Types/" + beerId,
+        type: "Patch",
+        data: removedBeerType,
+        success: function(data){
+            $('<form><p>Beer type deleted.</p></form>').dialog({
                 modal: true,
-                title: "Update Beer Type",
+                title: "Success",
                 buttons: {
                     'OK': function () {
-                        var test = $(this).find("#beerToChange").options[$(this).find("#beerToChange").selectedIndex].val();
-                        console.log (test);
+                        getBeerTypes();
                         $(this).dialog('close');
-                    },
-                    'Cancel': function () {
+                    }
+                }
+            });
+        },
+        error: function(){
+            $('<form><p>Error deleting beer type.</p></form>').dialog({
+                modal: true,
+                title: "Error",
+                buttons: {
+                    'OK': function () {
                         $(this).dialog('close');
                     }
                 }
             });
         }
     });
-    
 }
-
-function deleteBeerType(){
-    document.getElementById("dialog").innerText 
-            = "DELETE";
-        $( "#dialog" ).dialog( "open" );
-}
+getBeerTypes();
