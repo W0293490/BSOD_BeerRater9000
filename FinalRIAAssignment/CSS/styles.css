@@ -1,3 +1,4 @@
+
 #login, #register{
     text-align: center;
 }
@@ -11,9 +12,15 @@
     margin: 0px;
     border-radius: 0px;
 }
+
+.navbar-brand{
+  font-size: 30px;
+  color: #fefefe;
+}
 .container-fluid{
     padding-top: 1vh;
     padding-bottom: 1vh;
+    background-color: #0e83cd;
 }
 
 hr{
@@ -26,9 +33,21 @@ hr{
     border-left: 2px solid gray;
     margin-top: 10px;
 }
-
+form{
+    width: 100px;
+}
+#user-info{
+    display: none;
+}
+#login, #register{
+    display: none;
+}
 .navbar .dropdown{
     font-size: 20px;
+
+}
+.dropdown-toggle{
+
 }
 #error{
     text-align: center;
@@ -42,12 +61,14 @@ hr{
     min-height: 675px;
     width: 25%;
     float: left;
-    background-color: lightgray;
+    background-color: #F7BD01;
     box-shadow: inset 0 0 10px #000000;
+    color: black;
 }
 #right-side{
     width: 75%;
     overflow: auto;
+    background-color: #ffcc00;
 }
 
 #search{
@@ -74,10 +95,10 @@ hr{
    cursor: default;
 }
 #list .title{
-    padding-left: 20px; 
+    padding-left: 20px;
     padding-bottom: 10px;
     padding-top: 10px;
-    padding-right: 2%; 
+    padding-right: 2%;
 }
 
 #list .title:hover{
@@ -98,8 +119,14 @@ hr{
     background: #333;
     border: 1px solid gray;
     color: #FFFFFF;
+    background-color: #0e83cd;
     font-weight: bold;
 }
+
 .ui-widget-content{
     background: lightgray;
+}
+
+*{
+  color: white;
 }

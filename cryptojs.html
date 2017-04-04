@@ -1,0 +1,25 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html;charset=windows-1252" >
+<head>
+<script type="text/javascript" src="http://www.cryptojs.altervista.org/api/functions_cryptography.js"></script>
+
+<script>
+  var Crypt = new Crypt(); // Constructor
+  var registration_password = "test123"; // Original password when registering
+  var hashed_password =  Crypt.HASH.md5(registration_password); // Hash the password into an array
+  hashed_password = hashed_password.words.join(''); // Make the array into a string
+  // Store this string in db.json as password
+
+  var loggingInPassword = "test123"; // This is when a returning user tries to login
+  var hashed_login = Crypt.HASH.md5(loggingInPassword); // Hash with same method
+  hashed_login = hashed_login.words.join(''); // Make the array into a string
+
+  if (hashed_login == hashed_password){ // Compare the logging in hashed string with the stored hashed string
+    console.log("Logged in");
+  } else{
+    console.log("Wrong password");
+  }
+</script>
+
+<body>
+</body>

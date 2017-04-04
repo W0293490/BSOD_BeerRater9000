@@ -2,33 +2,87 @@
   "Users": [
     {
       "Username": "RedJordan",
-      "password": "-736260903-1895779836-377484904-319274370",
-      "email": "RedJordan@hotmail.com",
+      "password": "1053048856-24675773-1610459268563112731-20455687861786744110-132781181713120503271092803055201521087996752768252311576489058414-1365547490-1423464655926682729",
+      "email": "RedJordan@RedJordan.com",
       "isAdmin": "false",
       "id": 1
     },
     {
-      "Username": "admin",
-      "password": "-736260903-1895779836-377484904-319274370",
-      "email": "admin@admin.com",
-      "isAdmin": "true",
+      "Username": "RedJordan1",
+      "password": "-941100463-457049820-509892417133537269293117508-19154453211005815820-1609443511-1313332128216762209-19032409-846163207570870545222437695-5849108481740710196",
+      "email": "RedJordan123@RedJordan.com",
+      "isAdmin": "false",
       "id": 2
     },
     {
-      "Username": "tester123",
-      "password": "-736260903-1895779836-377484904-319274370",
-      "email": "test@test.com",
+      "Username": "andrew1",
+      "password": "936948035-393018363-1401490975-1874250812-1281377971773640047-846039501197262421-1264005738-158028788914925161761078406852701935715163857082325036059363798255",
+      "email": "andrew@asdf.com",
       "isAdmin": "false",
       "id": 3
     },
     {
-      "Username": "pleasehash",
-      "password": "-736260903-1895779836-377484904-319274370",
-      "email": "hasher@has.com",
+      "Username": "beerman",
+      "password": "-1079626130-1050977260-821794174-1375172331-4927849181788236911-414807013524632225353156211679418271612427973189939112514046556461597935942-491421280-1239295930",
+      "email": "beer@beer.com",
       "isAdmin": "false",
       "id": 4
     }
   ],
-  "Beer-Types": [],
-  "Beer-Reviews": []
+  "Beer-Types": [
+    {
+      "name": "F",
+      "createdAt": "Mon Apr 03 2017 3:56:06 PM",
+      "isActive": "false",
+      "id": 1
+    },
+    {
+      "name": "TEST",
+      "createdAt": "Mon Apr 03 2017 3:56:12 PM",
+      "isActive": "false",
+      "id": 2
+    },
+    {
+      "name": "134",
+      "createdAt": "Mon Apr 03 2017 3:56:18 PM",
+      "isActive": "false",
+      "id": 3
+    },
+    {
+      "name": "",
+      "createdAt": "Mon Apr 03 2017 3:59:43 PM",
+      "isActive": "false",
+      "id": 4
+    },
+    {
+      "name": "2",
+      "createdAt": "Mon Apr 03 2017 4:03:29 PM",
+      "isActive": "true",
+      "id": 5
+    },
+    {
+      "name": "TestBeerE",
+      "createdAt": "Mon Apr 03 2017 7:16:39 PM",
+      "isActive": "false",
+      "id": 6
+    },
+    {
+      "name": "beer!",
+      "createdAt": "Mon Apr 03 2017 7:33:50 PM",
+      "isActive": "true",
+      "id": 7
+    },
+    {
+      "name": "123",
+      "createdAt": "Mon Apr 03 2017 7:34:37 PM",
+      "isActive": "true",
+      "id": 8
+    },
+    {
+      "name": ";'",
+      "createdAt": "Mon Apr 03 2017 8:31:18 PM",
+      "isActive": "true",
+      "id": 9
+    }
+  ]
 }
