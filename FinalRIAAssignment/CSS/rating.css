@@ -1,0 +1,18 @@
+.raterater-wrapper { overflow: visible; }
+
+.raterater-layer,
+.raterater-layer i {
+    display: block;
+    position: absolute;
+    overflow: visible;
+    top: 0px;
+    left: 0px;
+}
+
+.raterater-hover-layer { display: none; }
+
+.raterater-hover-layer i,
+.raterater-rating-layer i {
+    width: 0px;
+    overflow: hidden;
+}

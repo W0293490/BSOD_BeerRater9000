@@ -8,18 +8,27 @@
     margin-left: 33%;
 }
 .navbar{
-    background-color: #795a31;
-    color: #e3a658;
     margin: 0px;
     border-radius: 0px;
+    border-color: #7e5b00;
 }
 
-.navbar-brand{
-    color: #e3a658;
+#header {
+    color: white;
+}
+#create-review{
+    display: none;
+}
+
+.navbar-brand {
+    color: white;
 }
 .container-fluid{
     padding-top: 1vh;
     padding-bottom: 1vh;
+    background-color: #726255;
+    box-shadow: inset 0 0 10px #7e5b00;
+    border-color: #7e5b00;
 }
 
 hr{
@@ -32,10 +41,19 @@ hr{
     border-left: 2px solid gray;
     margin-top: 10px;
 }
-
+form{
+    width: 100px;
+}
+#user-info{
+    display: none;
+}
+#login, #register{
+    display: none;
+}
 .navbar .dropdown{
     font-size: 20px;
 }
+
 #error{
     text-align: center;
 }
@@ -48,17 +66,19 @@ hr{
     min-height: 675px;
     width: 25%;
     float: left;
-    background-color: rgba(121, 90, 49, 0.67);
+    background-color: #F0C030;
     box-shadow: inset 0 0 10px #000000;
 }
 #right-side{
-    width: 75%;
+    float: left;
     overflow: auto;
-    background-color: rgb(227, 166, 88);
+    text-align: center;
+    width: 75%;
 }
 
 #search{
-    border: solid gray;
+    border: solid #7e5b00;
+    color: #726255;
     box-shadow: inset 0 0 10px #000000;
     width: 100%;
     height: 50px;
@@ -80,33 +100,76 @@ hr{
    pointer-events: none;
    cursor: default;
 }
-#list .title{
+#list .beer-type{
     padding-left: 20px; 
     padding-bottom: 10px;
     padding-top: 10px;
     padding-right: 2%; 
 }
 
-#list .title:hover{
-    background-color: #3498db;
+#list li.active{
+    background-color: #f4b000;
+    padding-left: 30px;
+    box-shadow: inset 0 0 10px #000000;
+}
+
+#list .beer-type:hover{
+    background-color: #F7E291;
     padding-left: 30px;
     box-shadow: inset 0 0 10px #000000;
     cursor: pointer;
     cursor: hand;
 }
 
-#list li.active{
-    background-color: cornflowerblue;
-    padding-left: 30px;
-    box-shadow: inset 0 0 10px #000000;
+.beer-type-menu-items{
+    display: none;
 }
 
+#register-form, #login-form{
+    background-color: #726255;
+}
+input{
+    color: #726255;
+}
+.buttons{
+    background-color: #7e5b00;
+}
+
+#error{
+    color: black;
+}
 .ui-dialog-titlebar {
-    background: #333;
+    background: #473E35;
     border: 1px solid gray;
     color: #FFFFFF;
     font-weight: bold;
 }
 .ui-widget-content{
-    background: lightgray;
+    background: #E0AA4D;
+}
+.beer-type, .glyphicon-menu-hamburger, #user-name{
+    color: white;
+}
+
+.ui-button-text{
+    color: green;
+    padding: auto;
+    margin: auto;
+}
+.ui-button {
+    background: blue;
+}
+
+.ui-icon-closethick{
+    background: #FFFFFF;
+    padding: 0px;
+    margin: 0px;
+}
+
+.ui-widget-overlay{
+    background: #F2FFA9;
+}
+
+#beerToChange{
+    color: #726255;
 }
