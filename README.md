@@ -1,6 +1,7 @@
 # BSOD_BeerRater9000
 A web app that allows users to rate, review, and browse reviews of selected beer brands.
 Uses JSON-Server (https://github.com/typicode/json-server) as the database/back-end.
+Also implements hashing of passwords through the CryptoJS API (http://cryptojs.altervista.org/api/).
 
 # What you need:
 * Node.js
