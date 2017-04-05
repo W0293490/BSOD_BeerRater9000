@@ -14,7 +14,10 @@
         <script src = "https://code.jquery.com/jquery-1.10.2.js"></script>
         <script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
         <script type="text/javascript" src="http://www.cryptojs.altervista.org/api/functions_cryptography.js"></script>
+        <script src="JavaScript/globalVariables.js"></script>
         <script src="JavaScript/javascript.js"></script>
+        <script src="JavaScript/userRegistrationAndLogin.js"></script>
+        <script src="JavaScript/beerTypeCRUD.js"></script>
     </head>
     <body>
         <div id = "dialog" title = "About"></div>
@@ -29,10 +32,10 @@
                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                             <p id="user-name"></p>
                             <ul class="dropdown-menu">
-                                <li class="beer-type-menu-items"><a href="#" onclick="createBeerType();">Create Beer Type</a></li>
-                                <li class="beer-type-menu-items"><a href="#" onclick="updateBeerType();">Update A Beer Type</a></li>
-                                <li class="beer-type-menu-items"><a href="#" onclick="deleteBeerType();">Delete A Beer Type</a></li>
-                                <li><a href="#" onclick="logout();">Logout</a></li>
+                                <li class="beer-type-menu-items"><a href="#" id="create-beer-menu-item">Create Beer Type</a></li>
+                                <li class="beer-type-menu-items"><a href="#" id="update-beer-menu-item">Update A Beer Type</a></li>
+                                <li class="beer-type-menu-items"><a href="#" id="delete-beer-menu-item">Delete A Beer Type</a></li>
+                                <li><a href="#" id="logout-menu-item">Logout</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -78,7 +81,7 @@
                         <input class="w3-input w3-border" id="password-login" type="password" required>
                     </p>
                     <p>      
-                        <button class="w3-btn buttons" onclick="signInUser();">Login</button>
+                        <button class="w3-btn buttons" id="sign-in-user-button">Login</button>
                     </p>
                 </div>
             </div>
@@ -100,7 +103,7 @@
                         <input class="w3-input w3-border" id="password-email" type="text" required>
                     </p>
                     <p>      
-                        <button class="w3-btn buttons" onclick="registerUser();">Register</button>
+                        <button class="w3-btn buttons" id="register-user-button">Register</button>
                     </p>
                 </div>
             </div>
