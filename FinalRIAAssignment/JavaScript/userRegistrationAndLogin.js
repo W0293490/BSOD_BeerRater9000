@@ -144,7 +144,9 @@ $( document ).ready(function() {
         localStorage.setItem("user", null);
         document.getElementById("user-info").style.display = "none";
         document.getElementById("user-name").innerHTML = "";
+        document.getElementById("create-review").style.display = "none";
         setLoggedOutClasses(true);
+        changeDiv();
         displayBasicDialog("Logged Out", "You have successfully logged out.");
     });
 });

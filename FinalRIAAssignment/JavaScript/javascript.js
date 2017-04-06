@@ -14,29 +14,227 @@ $( document ).ready(function() {
         displayBasicDialog("About", "By: Blue Screen of Death</p><p>Class: Rich Internet Applications" +
                                 "</p><p>Created: March. 30nd 2017</p><p>Version 1.0.2");
     });
-    
+
     $( "#header" ).click(function() {
         if(this.innerText == "Beer Reviews"){
             changeDiv();
         }
     });
-
+    
     $( "#create-review" ).click(function() {
-        $('<form><p>Enter Review:</p> <textarea type="text" id="post-body" name="post-body" class="w3-input w3-border" placeholder="Post Body..." required></textarea><br></form>').dialog({
+        var rating = "</br><p>Rating: </p><p class='rating'>" +
+                     "<input type='radio' id='star5' name='rating' value='5' /><label for='star5' title='Rocks!'>5 stars</label>" +
+                     "<input type='radio' id='star4' name='rating' value='4' /><label for='star4' title='Pretty good'>4 stars</label>" +
+                     "<input type='radio' id='star3' name='rating' value='3' /><label for='star3' title='Meh'>3 stars</label>" +
+                     "<input type='radio' id='star2' name='rating' value='2' /><label for='star2' title='Kinda bad'>2 stars</label>" +
+                     "<input type='radio' id='star1' name='rating' value='1' /><label for='star1' title='Sucks big time'>1 star</label>" +
+                     "</p>";
+        $('<form><p>Enter Review:</p> <textarea type="text" id="review-body" class="w3-input w3-border" placeholder="Review..." required></textarea>' + rating + '<br></form>').dialog({
+            modal: true,
+            title: "Create Review",
+            width: "50%",
+            close: function () { 
+                $(this).dialog('destroy').remove();
+            },
+            buttons: {
+                'OK': function () {
+                    var ratings = document.getElementsByClassName('rating')[0].childNodes;
+                    for(var i = 0; i < ratings.length; i ++){
+                        if(ratings[i].checked != undefined && ratings[i].checked == true){
+                            var beerRating = ratings[i].value;
+                            break;
+                        }
+                    }
+                    var reviewText = document.getElementById("review-body").value;
+                    if(beerRating != undefined && reviewText.length > 0){
+                        $(this).dialog('close');
+                        createReview(reviewText, beerRating);
+                    }
+                    else{
+                        displayBasicDialog("Incomplete", "All fields need to be filled.");
+                    }
+                },
+                'Cancel': function () {
+                    $(this).dialog('close');
+                }
+            }
+            });
+    });
+    getBeerTypes();
+    getBeerReviews();
+});
+function createReview(reviewText, beerRating) {
+    var currDate = new Date();
+    var review = {
+        reviewText: reviewText,
+        reviewRating: beerRating,
+        beerID: currentBeer.id,
+        createdBy: currentUser.Username,
+        createdAt: currDate.toDateString() + " " + currDate.toLocaleTimeString(),
+        updatedAt: currDate.toDateString() + " " + currDate.toLocaleTimeString(),
+    };
+
+    $.ajax({
+        url: "http://localhost:3000/beer-reviews",
+        type: "POST",
+        data: review,
+        success: function(data){
+            displayBasicDialog("Beer Review Created", "The new review has been created.");
+            getBeerTypes();
+            getBeerReviews(true);
+        },
+        error: function(){
+            displayBasicDialog("Error", "Error creating the review.");
+        }
+    });
+}
+
+function displayReviews(){
+    if(currentUser != "null" && currentUser != null){
+        document.getElementById("create-review").style.display = "inline";
+    }
+    else{
+        document.getElementById("create-review").style.display = "none";
+    }
+    document.getElementById("reviews").innerHTML = "";
+    for(var i = 0; i < beerReviews.length; i++){
+        var review = "<div class='w3-container w3-card-4 review'>";
+        if(currentUser != null && currentUser.Username == beerReviews[i].createdBy){
+            beerReviewToUse = beerReviews[i];
+            review += "<button class='w3-btn buttons beer-review-delete-button' onclick='deleteReview();'>✖</button>";
+        }
+        review += "<h3 class='w3-text-yellow'>Created By: " + beerReviews[i].createdBy + "</h3>";
+        review += "<h4 class='w3-text-yellow'>Review Body</h4>";
+        review += "<p>" + beerReviews[i].reviewText + "</p>";
+        review += "<h4 class='w3-text-yellow'>Rating: ";
+        for(var x = 0; x < beerReviews[i].reviewRating; x++){
+            review += "🍺 ";
+        }
+        review += "</h4>";
+        review += "<h4 class='w3-text-yellow review-float-left'>Created At: </h4> <h4 class='review-float-left'>" + beerReviews[i].createdAt  + "</h4>";
+        review += "<h4 class='review-float-right'>"+ beerReviews[i].updatedAt  +"</h4> <h4 class='w3-text-yellow review-float-right'>Updated At: </h4>";
+        if(currentUser != null && currentUser.Username == beerReviews[i].createdBy){
+            review += "<button class='w3-btn buttons beer-review-edit-button' onclick='updateReview();')'>Edit</button>";
+        }
+        review += "</div>";
+        document.getElementById("reviews").innerHTML += review;
+    }
+}
+function deleteReview(){
+    $('<form><p>Are you sure you want to delete this review?</p></form>').dialog({
         modal: true,
-        title: "Create Review",
-        width: "50%",
+        title: "Delete?",
         buttons: {
             'OK': function () {
+                $(this).dialog('close');
+                $.ajax({
+                    url: "http://localhost:3000/beer-reviews/" + beerReviewToUse.id,
+                    type: "DELETE",
+                    success: function(data){
+                        displayBasicDialog("Success", "Review has been deleted.");
+                        getBeerReviews(true);
+                        beerReviewToUse = null;
+                    },
+                    error: function(){
+                        displayBasicDialog("Error", "Error deleting the review.");
+                    }
+                });
             },
-            'Cancel': function () {
+            'cancel': function(){
                 $(this).dialog('close');
             }
         }
     });
+}
+
+function updateReview(){
+    var rating = "</br><p>Rating: </p><p class='rating'>" +
+                     "<input type='radio' id='star5' name='rating' value='5' /><label for='star5' title='Rocks!'>5 stars</label>" +
+                     "<input type='radio' id='star4' name='rating' value='4' /><label for='star4' title='Pretty good'>4 stars</label>" +
+                     "<input type='radio' id='star3' name='rating' value='3' /><label for='star3' title='Meh'>3 stars</label>" +
+                     "<input type='radio' id='star2' name='rating' value='2' /><label for='star2' title='Kinda bad'>2 stars</label>" +
+                     "<input type='radio' id='star1' name='rating' value='1' /><label for='star1' title='Sucks big time'>1 star</label>" +
+                     "</p>";
+        $('<form><p>Enter Review:</p> <textarea type="text" id="review-body" class="w3-input w3-border" placeholder="Review..." required></textarea>' + rating + '<br></form>').dialog({
+            modal: true,
+            title: "Update Review",
+            width: "50%",
+            open: function() {
+                document.getElementById("review-body").value = beerReviewToUse.reviewText;
+            },
+            close: function () { 
+                $(this).dialog('destroy').remove();
+            },
+            buttons: {
+                'OK': function () {
+                    var ratings = document.getElementsByClassName('rating')[0].childNodes;
+                    for(var i = 0; i < ratings.length; i ++){
+                        if(ratings[i].checked != undefined && ratings[i].checked == true){
+                            var beerRating = ratings[i].value;
+                            break;
+                        }
+                    }
+                    var reviewText = document.getElementById("review-body").value;
+                    if(beerRating != undefined && reviewText.length > 0){
+                        $(this).dialog('close');
+                        patchReview(reviewText, beerRating);
+                    }
+                    else{
+                        displayBasicDialog("Incomplete", "All fields need to be filled.");
+                    }
+                },
+                'Cancel': function () {
+                    $(this).dialog('close');
+                }
+            }
+            });
+}
+
+function patchReview(reviewText, beerRating){
+    var currDate = new Date();
+    var updatedReview = {
+        reviewText: reviewText,
+        reviewRating: beerRating,
+        updatedAt: currDate.toDateString() + " " + currDate.toLocaleTimeString(),
+    };
+
+    $.ajax({
+        url: "http://localhost:3000/beer-reviews/" + beerReviewToUse.id,
+        type: "Patch",
+        data: updatedReview,
+        success: function(data){
+            displayBasicDialog("Success", "Beer review updated.");
+            getBeerReviews(true);
+            beerReviewToUse = null;
+        },
+        error: function(){
+            displayBasicDialog("Error", "Error updating beer review.");
+        }
     });
-    getBeerTypes();
-});
+}
+function getBeerReviews(display){
+    beerReviews = [];
+
+    $.ajax({
+        url: "http://localhost:3000/beer-reviews",
+        type: "GET",
+        success: function(data){
+            for(var i = 0; i < data.length; i++){
+                beerReviews[i] = data[i];
+            }
+            if(display){
+                displayReviews();
+            }
+        },
+        error: function(){
+            displayBasicDialog("Error", "Error getting beer reviews.");
+            return;
+        }
+    });
+}
+
+
+
 
 function changeDiv(divName) {
     document.getElementById("beer-reviews").style.display = "none";
@@ -46,6 +244,13 @@ function changeDiv(divName) {
     if(divName == null) {
         divName = "beer-reviews";
         document.getElementById("header").innerHTML = "Current Beer";
+        document.getElementById("reviews").innerHTML = "";
+        var ul = document.getElementById("list");
+        var items = ul.getElementsByTagName("li");
+        for(var i = 0; i < items.length; i ++)
+        {
+            items[i].classList.remove("active");
+        }
     }
     else{
         document.getElementById("header").innerHTML = "Beer Reviews";
@@ -92,6 +297,35 @@ function checkIfBeerTaken(beerTypeName){
     return beerNameTaken;
 }
 
-function addReview(){
-    
+function getBeerTypeMenuItems(){
+    var displayType;
+    if(currentUser.isAdmin == "true"){
+        displayType = "inline";
+    }
+    else{
+        displayType = "none";
+    }
+    var adminItems = document.getElementsByClassName("beer-type-menu-items");
+    for(var i = 0; i < adminItems.length; i ++){
+        adminItems[i].style.display = displayType;
+    }
+}
+
+function filter() {
+    // Declare variables
+    var input, filter, item, ul, li, i;
+    input = document.getElementById('search');
+    filter = input.value.toUpperCase();
+    ul = document.getElementById("list");
+    li = ul.getElementsByTagName('li');
+
+    // Loop through all list items, and hide those who don't match the search query
+    for (i = 0; i < li.length; i++) {
+        item = li[i];
+        if (item.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            li[i].style.display = "";
+        } else {
+            li[i].style.display = "none";
+        }
+    }
 }

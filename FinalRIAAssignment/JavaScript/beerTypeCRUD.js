@@ -1,24 +1,3 @@
-function getBeerTypeMenuItems(){
-    var displayType;
-    if(currentUser.isAdmin == "true"){
-        displayType = "inline";
-    }
-    else{
-        displayType = "none";
-    }
-    var adminItems = document.getElementsByClassName("beer-type-menu-items");
-    for(var i = 0; i < adminItems.length; i ++){
-        adminItems[i].style.display = displayType;
-    }
-
-    if(currentUser != "null" && currentUser != null){
-        document.getElementById("create-review").style.display = "inline";
-    }
-    else{
-        document.getElementById("create-review").style.display = "none";
-    }
-}
-
 function getBeerTypes(){
     beerTypes = [];
     var numOfBeers = 0;
@@ -50,8 +29,9 @@ function getBeerTypes(){
                         items[i].classList.remove("active");
                     }
                     else{
-                        currentBeer = beerTypes[i];
                         items[i].classList.add("active");
+                        currentBeer = beerTypes[i];
+                        displayReviews();
                     }
                 }
             });
