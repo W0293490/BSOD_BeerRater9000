@@ -8,139 +8,173 @@
       "id": 1
     },
     {
-      "Username": "RedJordan1",
-      "password": "-941100463-457049820-509892417133537269293117508-19154453211005815820-1609443511-1313332128216762209-19032409-846163207570870545222437695-5849108481740710196",
-      "email": "RedJordan123@RedJordan.com",
+      "Username": "Sean",
+      "password": "-1324747845-1138471240608276862-798137973-1878467319-127932899715775317241886030777-213582861615829214527728508715950906071513006801669142491401290667212647046",
+      "email": "sean@sean.com",
       "isAdmin": "false",
       "id": 2
     },
     {
-      "Username": "11111111111",
-      "password": "1808221814-2069931410-1314948416-1610680345-188171070216847582391174452983-14946102155358399491805811794-2017635720-11266724704932366561751295502-13603649631274135962",
-      "email": "s11111@f111111.com",
+      "Username": "Trent",
+      "password": "-1324747845-1138471240608276862-798137973-1878467319-127932899715775317241886030777-213582861615829214527728508715950906071513006801669142491401290667212647046",
+      "email": "trent@trent.com",
       "isAdmin": "false",
       "id": 3
     },
     {
-      "Username": "sdfsdfsdfsdgdzg",
-      "password": "-1665822464-1555220265-99882431-15811772427464264-1573482769-954416790-7641246141179101010-14868386171767059582-669603780618648721-1143698888-11622194631555001586",
-      "email": "sdgsdgsdg@dgdsgdgsd.com",
+      "Username": "Andrew",
+      "password": "-1324747845-1138471240608276862-798137973-1878467319-127932899715775317241886030777-213582861615829214527728508715950906071513006801669142491401290667212647046",
+      "email": "andrew@andrew.com",
       "isAdmin": "false",
       "id": 4
-    },
-    {
-      "Username": "fsdgdg",
-      "password": "-1737923171-382448699-1556763215521032015-1562058111-118507293615383009751543009197-1525831544545393874-126815994-177216220-1377535188-8356323611572165123-108234360",
-      "email": "dsdf@sdsd.com",
-      "isAdmin": "false",
-      "id": 5
-    },
-    {
-      "Username": "sadasd",
-      "password": "7409676951376934303-1445949732-1576015438887114114451773068-2577787920480026001304184428-1948771441126448329-1982978652-93624882012107318551565414885-2053762337",
-      "email": "sadasdas@asddad.com",
-      "isAdmin": "false",
-      "id": 6
-    },
-    {
-      "Username": "asdasdasdasdafas",
-      "password": "-6541725061073820042667474820-406489777877855812219018103-771515847387855-1108097861-1252946746-1432306949-1002446223-8234806181943551952-1257577301371381363",
-      "email": "asfasfasfasfasfasf@adsfsgasgsgs.com",
-      "isAdmin": "false",
-      "id": 7
-    },
-    {
-      "Username": "sasfsgasgasg",
-      "password": "-80619460-88538963318325641971643407019-166909476933073945611968991821088147634493178248-9781518281465509023-70311903719981861062112192355-1123565593-455326200",
-      "email": "gasgasgasgg@dfdsf.come",
-      "isAdmin": "false",
-      "id": 8
     }
   ],
   "Beer-Types": [
     {
-      "name": "F",
+      "name": "Schooner",
       "createdAt": "Mon Apr 03 2017 3:56:06 PM",
-      "isActive": "false",
+      "isActive": "true",
       "id": 1
     },
     {
-      "name": "TEST",
+      "name": "Oland's",
       "createdAt": "Mon Apr 03 2017 3:56:12 PM",
-      "isActive": "false",
+      "isActive": "true",
       "id": 2
     },
     {
-      "name": "134",
+      "name": "Alpine",
       "createdAt": "Mon Apr 03 2017 3:56:18 PM",
-      "isActive": "false",
+      "isActive": "true",
       "id": 3
     },
     {
-      "name": "",
+      "name": "Ten Penny",
       "createdAt": "Mon Apr 03 2017 3:59:43 PM",
-      "isActive": "false",
+      "isActive": "true",
       "id": 4
     },
     {
-      "name": "2",
+      "name": "Labatt Blue",
       "createdAt": "Mon Apr 03 2017 4:03:29 PM",
       "isActive": "false",
       "id": 5
     },
     {
-      "name": "hi",
+      "name": "Alexander Keith's",
       "createdAt": "Tue Apr 04 2017 11:59:15 AM",
-      "isActive": "false",
+      "isActive": "true",
       "id": 6
     },
     {
-      "name": "gsdsdgsdgsdg",
+      "name": "Coor's Light",
       "createdAt": "Tue Apr 04 2017 12:23:08 PM",
-      "isActive": "false",
+      "isActive": "true",
       "id": 7
     },
     {
-      "name": "gcb",
+      "name": "Miller",
       "createdAt": "Tue Apr 04 2017 2:07:38 PM",
-      "isActive": "false",
+      "isActive": "true",
       "id": 8
     },
     {
-      "name": "ANDREWS BEER",
+      "name": "Budweiser",
       "createdAt": "Tue Apr 04 2017 2:09:09 PM",
       "isActive": "true",
       "id": 9
+    }
+  ],
+  "beer-reviews": [
+    {
+      "reviewText": "Delicious!!!",
+      "reviewRating": "5",
+      "beerID": "1",
+      "createdBy": "RedJordan",
+      "createdAt": "Wed Apr 05 2017 9:06:47 PM",
+      "updatedAt": "Thu Apr 06 2017 12:25:56 AM",
+      "id": 1
     },
     {
-      "name": "7",
-      "createdAt": "Tue Apr 04 2017 2:11:06 PM",
-      "isActive": "true",
+      "reviewText": "Liquid gold....",
+      "reviewRating": "4",
+      "beerID": "1",
+      "createdBy": "Sean",
+      "createdAt": "Wed Apr 05 2017 9:06:47 PM",
+      "updatedAt": "Thu Apr 06 2017 12:25:56 AM",
+      "id": 2
+    },
+    {
+      "reviewText": "This tastes like heaven...",
+      "reviewRating": "4",
+      "beerID": "2",
+      "createdBy": "Trent",
+      "createdAt": "Thu Apr 06 2017 11:14:10 AM",
+      "updatedAt": "Thu Apr 06 2017 11:50:28 AM",
+      "id": 3
+    },
+    {
+      "reviewText": "Very beery...",
+      "reviewRating": "3",
+      "beerID": "4",
+      "createdBy": "Andrew",
+      "createdAt": "Thu Apr 06 2017 11:23:01 AM",
+      "updatedAt": "Thu Apr 06 2017 11:48:46 AM",
+      "id": 4
+    },
+    {
+      "reviewText": "Tastes like elephant urine...",
+      "reviewRating": "2",
+      "beerID": "6",
+      "createdBy": "Sean",
+      "createdAt": "Thu Apr 06 2017 11:23:01 AM",
+      "updatedAt": "Thu Apr 06 2017 11:48:46 AM",
+      "id": 5
+    },
+    {
+      "reviewText": "Grosssss...",
+      "reviewRating": "2",
+      "beerID": "1",
+      "createdBy": "Andrew",
+      "createdAt": "Thu Apr 06 2017 11:23:01 AM",
+      "updatedAt": "Thu Apr 06 2017 11:48:46 AM",
+      "id": 6
+    },
+    {
+      "reviewText": "You call this beer???",
+      "reviewRating": "3",
+      "beerID": "2",
+      "createdBy": "RedJordan",
+      "createdAt": "Thu Apr 06 2017 11:23:01 AM",
+      "updatedAt": "Thu Apr 06 2017 11:48:46 AM",
+      "id": 7
+    },
+    {
+      "reviewText": "Hints of caramel and cilantro....",
+      "reviewRating": "3",
+      "beerID": "8",
+      "createdBy": "Trent",
+      "createdAt": "Thu Apr 06 2017 11:23:01 AM",
+      "updatedAt": "Thu Apr 06 2017 11:48:46 AM",
+      "id": 8
+    },
+    {
+      "reviewText": "Meh...",
+      "reviewRating": "2",
+      "beerID": "3",
+      "createdBy": "Sean",
+      "createdAt": "Thu Apr 06 2017 11:23:01 AM",
+      "updatedAt": "Thu Apr 06 2017 11:48:46 AM",
+      "id": 9
+    },
+    {
+      "reviewText": "I barfed and drank 3 more....",
+      "reviewRating": "1",
+      "beerID": "7",
+      "createdBy": "Andrew",
+      "createdAt": "Thu Apr 06 2017 11:23:01 AM",
+      "updatedAt": "Thu Apr 06 2017 11:48:46 AM",
       "id": 10
-    },
-    {
-      "name": "g",
-      "createdAt": "Tue Apr 04 2017 3:01:23 PM",
-      "isActive": "true",
-      "id": 11
-    },
-    {
-      "name": "T1",
-      "createdAt": "Tue Apr 04 2017 3:32:36 PM",
-      "isActive": "true",
-      "id": 12
-    },
-    {
-      "name": "d",
-      "createdAt": "Tue Apr 04 2017 3:33:18 PM",
-      "isActive": "false",
-      "id": 13
-    },
-    {
-      "name": "fgdg",
-      "createdAt": "Tue Apr 04 2017 3:36:07 PM",
-      "isActive": "true",
-      "id": 14
     }
   ]
 }
